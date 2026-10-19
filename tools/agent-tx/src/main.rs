@@ -2404,21 +2404,10 @@ impl<'a> Cli<'a> {
         token
     }
 
-    /// The value belonging to the flag just consumed.
-    fn value(&mut self, flag: &str) -> Result<String, String> {
-        self.next()
-            .ok_or_else(|| format!("{flag} requires a value"))
-    }
-
     /// The value belonging to the flag just consumed, stating the expected form.
     fn value_expected(&mut self, flag: &str, expected: &str) -> Result<String, String> {
         self.next()
             .ok_or_else(|| format!("{flag} requires a value (expected {expected})"))
-    }
-
-    fn positional(&mut self, name: &str) -> Result<String, String> {
-        self.next()
-            .ok_or_else(|| format!("`{}` requires {name}", self.cmd))
     }
 
     fn positional_expected(&mut self, arg_name: &str, expected: &str) -> Result<String, String> {
